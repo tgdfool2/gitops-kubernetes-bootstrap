@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     path: ./k8s
-    repoURL: https://github.com/tgdfool2/bands_api.git
+    repoURL: https://github.com/tgdfool2/band_api.git
     targetRevision: HEAD
   syncPolicy:
     automated: {}
