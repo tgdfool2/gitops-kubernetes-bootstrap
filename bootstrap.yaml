@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: .
-    repoURL: https://github.com/cloud-native-skunkworks/gitops-kubernetes-bootstrap
+    repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
     targetRevision: HEAD
   syncPolicy:
     automated:
