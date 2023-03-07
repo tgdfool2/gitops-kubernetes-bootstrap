@@ -6,10 +6,10 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   name: crossplane
-  namespace: crossplane-system
+  namespace: argocd
 spec:
   destination:
-    namespace: argocd
+    namespace: crossplane-system
     server: https://kubernetes.default.svc
   project: default
   source:
