@@ -1,7 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: bootstrap-resources
   namespace: argocd
 spec:
   destination:
@@ -9,11 +13,10 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: .
+    path: controlplane/bootstrap-resources
     repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
     targetRevision: HEAD
   syncPolicy:
-    automated:
-      selfHeal: true
+    automated: {}
     syncOptions:
     - CreateNamespace=true

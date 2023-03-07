@@ -1,0 +1,17 @@
+---
+kind: CivoKubernetes
+apiVersion: cluster.civo.crossplane.io/v1alpha1
+metadata:
+  name: test-crossplane
+spec:
+  applications: []
+  connectionDetails:
+    connectionSecretNamePrefix: "cluster-details"
+    connectionSecretNamespace: "default"
+  name: test-crossplane
+  pools:
+  - count: 1
+    size: g4s.kube.xsmall
+  providerConfigRef:
+    name: civo-provider
+  version: "1.23.6-k3s1"
