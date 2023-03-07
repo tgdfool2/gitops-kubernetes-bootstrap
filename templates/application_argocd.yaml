@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: argo/argo-cd
+    helm:
+      values: |
+        controller:
+          args:
+            appResyncPeriod: 15
+        repoServer:
+          extraArgs:
+          - '--revision-cache-expiration=30s'
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: "5.24.1"
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
