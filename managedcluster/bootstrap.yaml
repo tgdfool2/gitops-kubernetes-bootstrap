@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+  namespace: argocd
+spec:
+  destination:
+    name: test-crossplane
+    namespace: argocd
+  project: default
+  source:
+    path: managedcluster
+    repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

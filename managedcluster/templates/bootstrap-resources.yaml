@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: bootstrap-resources
+  namespace: argocd
+spec:
+  destination:
+    name: test-crossplane
+    namespace: argocd
+  project: default
+  source:
+    path: managedcluster/bootstrap-resources
+    repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
