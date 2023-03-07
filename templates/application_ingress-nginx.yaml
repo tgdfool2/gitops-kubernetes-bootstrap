@@ -13,7 +13,7 @@ spec:
   source:
     chart: ingress-nginx
     helm:
-      values:
+      values: |
         controller:
           updateStrategy:
             type: "RollingUpdate"
