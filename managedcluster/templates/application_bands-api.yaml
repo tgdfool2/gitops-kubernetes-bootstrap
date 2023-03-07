@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: bands-api-managedcluster
+  namespace: argocd
+spec:
+  destination:
+    name: test-crossplane
+    namespace: bands-api
+  project: default
+  source:
+    path: ./k8s
+    repoURL: https://github.com/tgdfool2/bands_api.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
