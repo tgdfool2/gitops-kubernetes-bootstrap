@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: argo/argo-cd
+    chart: argo-cd
     helm:
       values: |
         controller:
