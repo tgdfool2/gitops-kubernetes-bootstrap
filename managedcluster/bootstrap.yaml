@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     name: test-crossplane
-    namespace: argocd
+    namespace: default
   project: default
   source:
     path: managedcluster
