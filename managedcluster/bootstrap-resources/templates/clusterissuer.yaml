@@ -16,3 +16,21 @@ spec:
           apiTokenSecretRef:
             name: cloudflare-credentials
             key: api-token
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: olivier@fournier.io
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - dns01:
+        cloudflare:
+          email: olivier@fournier.io
+          apiTokenSecretRef:
+            name: cloudflare-credentials
+            key: api-token

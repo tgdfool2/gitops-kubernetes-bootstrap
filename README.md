@@ -11,6 +11,7 @@ helm upgrade --install argocd argo/argo-cd \
   --namespace argocd --create-namespace \
   --version "5.24.1" --wait
 
+# Infrastructure bootstrap on controlplane (kind)
 k apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/controlplane/bootstrap.yaml
 
@@ -34,9 +35,11 @@ sed "s/<CLOUDFLARE_API_TOKEN>/${CLOUDFLARE_API_TOKEN}/" \
   managedcluster/resources/cloudflare/credentials.yaml | \
   k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f -
 
+# Infrastructure bootstrap on managedcluster (test-crossplane)
 k apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/managedcluster/bootstrap.yaml
 
+# Applications bootstrap on managedcluster (test-crossplane)
 k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/applications/bootstrap.yaml
 
