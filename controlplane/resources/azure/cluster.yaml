@@ -20,4 +20,4 @@ spec:
   nodeCount: 1
   writeConnectionSecretToRef:
     namespace: crossplane-system
-    name: test-crossplane-creds
+    name: creds-test-crossplane

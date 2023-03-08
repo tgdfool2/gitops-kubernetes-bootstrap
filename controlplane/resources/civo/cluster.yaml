@@ -6,7 +6,7 @@ metadata:
 spec:
   applications: []
   connectionDetails:
-    connectionSecretNamePrefix: test-crossplane-creds
+    connectionSecretNamePrefix: creds
     connectionSecretNamespace: crossplane-system
   name: test-crossplane
   pools:
