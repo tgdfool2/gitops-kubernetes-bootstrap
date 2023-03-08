@@ -37,6 +37,9 @@ sed "s/<CLOUDFLARE_API_TOKEN>/${CLOUDFLARE_API_TOKEN}/" \
 k apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/managedcluster/bootstrap.yaml
 
+k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f \
+  https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/applications/bootstrap.yaml
+
 # Tear down
 k delete -f controlplane/resources/civo/cluster.yaml
 kind delete cluster -n test-crossplane

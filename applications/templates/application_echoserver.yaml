@@ -5,15 +5,15 @@ metadata:
     argocd.argoproj.io/sync-wave: "-2"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: echoserver-managedcluster
+  name: echoserver
   namespace: argocd
 spec:
   destination:
-    name: test-crossplane
-    namespace: echoserver
+    namespace: argocd
+    server: https://kubernetes.default.svc
   project: default
   source:
-    path: managedcluster/resources/echoserver
+    path: applications/resources/echoserver
     repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
     targetRevision: HEAD
   syncPolicy:
