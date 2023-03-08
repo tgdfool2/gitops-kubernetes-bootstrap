@@ -9,8 +9,8 @@ metadata:
   namespace: argocd
 spec:
   destination:
+    name: test-crossplane
     namespace: external-dns
-    server: https://kubernetes.default.svc
   project: default
   source:
     repoURL: 'https://charts.bitnami.com/bitnami'
