@@ -1,7 +1,0 @@
----
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-do
-spec:
-  package: "crossplane/provider-digitalocean:v0.2.0-rc.0.44.ga4257b6-main"
