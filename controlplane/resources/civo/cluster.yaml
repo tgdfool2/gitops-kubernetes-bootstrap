@@ -6,12 +6,10 @@ metadata:
 spec:
   applications: []
   connectionDetails:
-    connectionSecretNamePrefix: "cluster-details"
-    connectionSecretNamespace: "default"
+    connectionSecretNamePrefix: test-crossplane-creds
+    connectionSecretNamespace: crossplane-system
   name: test-crossplane
   pools:
   - count: 1
     size: g4s.kube.xsmall
-  providerConfigRef:
-    name: civo-provider
   version: "1.23.6-k3s1"
