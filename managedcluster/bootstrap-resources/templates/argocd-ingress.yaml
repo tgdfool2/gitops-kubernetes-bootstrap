@@ -25,4 +25,4 @@ spec:
   tls:
   - hosts:
     - argocd.nni.fournier.io
-    secretName: https-cert
+    secretName: argocd-ssl-cert

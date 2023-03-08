@@ -38,7 +38,7 @@ k apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/managedcluster/bootstrap.yaml
 
 # Tear down
-k delete -f controlplane/resources/azure/cluster.yaml
+k delete -f controlplane/resources/civo/cluster.yaml
 kind delete cluster -n test-crossplane
 
 # Install Crossplane CLI (optional)

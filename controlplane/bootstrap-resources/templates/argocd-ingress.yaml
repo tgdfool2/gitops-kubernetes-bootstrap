@@ -25,4 +25,4 @@ spec:
   tls:
   - hosts:
     - argocd.local
-    secretName: https-cert
+    secretName: argocd-ssl-cert
