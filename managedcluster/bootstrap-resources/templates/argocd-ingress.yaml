@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  name: argocd-server-ingress-managedcluster
+  namespace: argocd
+spec:
+  rules:
+  - host: argocd.nni.fournier.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - argocd.nni.fournier.io
+    secretName: https-cert
