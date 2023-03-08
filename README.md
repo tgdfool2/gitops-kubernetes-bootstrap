@@ -14,8 +14,8 @@ helm upgrade --install argocd argo/argo-cd \
 k apply -f \
   https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/controlplane/bootstrap.yaml
 
+# Retrieve admin password:
 k -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-# => New Password: Argo.555$
 
 export CIVO_API_KEY='<very-secret-api-key>'
 sed "s/<CIVO_API_KEY>/${CIVO_API_KEY}/" controlplane/resources/civo/providerconfig.yaml | k apply -f -
@@ -48,26 +48,24 @@ mv kubectl-crossplane ~/bin/
 
 ## Resources
 
-```
-# kind
-https://magmax.org/en/blog/argocd/
-https://hub.docker.com/r/kindest/node/tags
-https://nickjanetakis.com/blog/configuring-a-kind-cluster-with-nginx-ingress-using-terraform-and-helm
+### kind
+* https://magmax.org/en/blog/argocd/
+* https://hub.docker.com/r/kindest/node/tags
+* https://nickjanetakis.com/blog/configuring-a-kind-cluster-with-nginx-ingress-using-terraform-and-helm
 
-# Crossplane
-https://www.youtube.com/watch?v=Dw0SMLHZvXM
-https://github.com/anais-codefresh/crossplane-example
-https://github.com/vfarcic/crossplane-composite-demo.git
+### Crossplane
+* https://www.youtube.com/watch?v=Dw0SMLHZvXM
+* https://github.com/anais-codefresh/crossplane-example
+* https://github.com/vfarcic/crossplane-composite-demo.git
 
-# ArgoCD Secrets management
-https://medium.com/containers-101/gitops-secret-management-with-azure-csi-secret-store-960800a550e6
-https://github.com/Azure/secrets-store-csi-driver-provider-azure#provide-identity-to-access-key-vault
-https://cloud.redhat.com/blog/how-to-use-argocd-deployments-with-github-tokens
+### ArgoCD Secrets management
+* https://medium.com/containers-101/gitops-secret-management-with-azure-csi-secret-store-960800a550e6
+* https://github.com/Azure/secrets-store-csi-driver-provider-azure#provide-identity-to-access-key-vault
+* https://cloud.redhat.com/blog/how-to-use-argocd-deployments-with-github-tokens
 
-# ArgoCD Example Apps
-https://github.com/argoproj/argocd-example-apps
-https://github.com/dockersamples/example-voting-app
+### ArgoCD Example Apps
+* https://github.com/argoproj/argocd-example-apps
+* https://github.com/dockersamples/example-voting-app
 
-# ArgoCD App of Apps
-https://www.youtube.com/watch?v=GAu1INNeE7E&t=2s&ab_channel=CloudNativeSkunkworks
-```
+### ArgoCD App of Apps
+* https://www.youtube.com/watch?v=GAu1INNeE7E&t=2s&ab_channel=CloudNativeSkunkworks
