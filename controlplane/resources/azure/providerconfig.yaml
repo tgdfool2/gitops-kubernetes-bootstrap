@@ -2,7 +2,7 @@
 apiVersion: azure.crossplane.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: provider-azure
+  name: default
 spec:
   credentials:
     source: Secret
