@@ -31,7 +31,7 @@ argocd cluster add test-crossplane --kubeconfig /var/tmp/test-crossplane.kubecon
 
 export CLOUDFLARE_API_TOKEN='<very-secret-token>'
 sed "s/<CLOUDFLARE_API_TOKEN>/${CLOUDFLARE_API_TOKEN}/" \
-  managedcluster/resources/external-dns/cloudflare-credentials.yaml | \
+  managedcluster/resources/cloudflare/credentials.yaml | \
   k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f -
 
 k apply -f \
