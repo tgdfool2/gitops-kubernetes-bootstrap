@@ -17,7 +17,7 @@ spec:
       paths:
       - backend:
           service:
-            name: argocd-server
+            name: argocd-managedcluster-server
             port:
               name: https
         path: /
