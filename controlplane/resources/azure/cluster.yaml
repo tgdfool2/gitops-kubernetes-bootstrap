@@ -2,19 +2,22 @@
 apiVersion: azure.crossplane.io/v1alpha3
 kind: ResourceGroup
 metadata:
-  name: test-tgdfool2-rg
+  name: test-crossplane-rg
 spec:
   location: westeurope
 ---
 apiVersion: compute.azure.crossplane.io/v1alpha3
 kind: AKSCluster
 metadata:
-  name: test-tgdfool2-aks
+  name: test-crossplane-aks
 spec:
   location: westeurope
-  version: "1.22.4"
+  version: "1.25.5"
   nodeVMSize: Standard_B2s
   resourceGroupNameRef:
-    name: test-tgdfool2-rg
-  dnsNamePrefix: test-tgdfool2
+    name: test-crossplane-rg
+  dnsNamePrefix: test-crossplane
   nodeCount: 1
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: test-crossplane-aks
