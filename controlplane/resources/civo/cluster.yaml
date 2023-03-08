@@ -10,6 +10,6 @@ spec:
     connectionSecretNamespace: crossplane-system
   name: test-crossplane
   pools:
-  - count: 1
-    size: g4s.kube.xsmall
+  - count: 2
+    size: g4s.kube.small
   version: "1.23.6-k3s1"
