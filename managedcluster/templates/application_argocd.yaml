@@ -9,7 +9,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    server: test-crossplane
+    name: test-crossplane
     namespace: argocd
   project: default
   source:
