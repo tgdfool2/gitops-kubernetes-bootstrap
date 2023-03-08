@@ -9,8 +9,8 @@ metadata:
   namespace: argocd
 spec:
   destination:
+    name: test-crossplane
     namespace: argocd
-    server: https://kubernetes.default.svc
   project: default
   source:
     path: managedcluster/bootstrap-resources
