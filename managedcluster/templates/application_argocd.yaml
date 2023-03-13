@@ -16,7 +16,7 @@ spec:
     chart: argo-cd
     helm:
       values: |
-        config:
+        configs:
           cmp:
             create: true
             plugins:
