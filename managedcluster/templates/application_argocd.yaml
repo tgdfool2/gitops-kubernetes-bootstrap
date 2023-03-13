@@ -16,6 +16,27 @@ spec:
     chart: argo-cd
     helm:
       values: |
+        configs:
+          cm:
+            configManagementPlugins: |-
+              - generate:
+                  args:
+                  - "kustomize build ${ENVIRONMENT}"
+                  command:
+                  - "/bin/sh"
+                  - "-c"
+                init:
+                  args:
+                  - |
+                    cd _${ARGOCD_APP_NAME} \
+                      && kustomize edit set image \
+                        ${REGISTRY}/${ARGOCD_APP_NAME}=${REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION}
+                  command:
+                  - "/bin/sh"
+                  - "-c"
+                name: "kustomize"
+            kustomize.buildOptions: --load_restrictor none
+            kustomize.buildOptions.v4.1.3: --output /tmp
         controller:
           args:
             appResyncPeriod: 15
