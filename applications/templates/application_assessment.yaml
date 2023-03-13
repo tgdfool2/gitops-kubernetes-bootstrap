@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: k8s/test-crossplane
+    path: ./k8s
     plugin:
       env:
       - name: ENVIRONMENT
