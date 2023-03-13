@@ -35,6 +35,7 @@ spec:
                   command:
                   - "/bin/sh"
                   - "-c"
+                  #- "kustomize build ${ENVIRONMENT}"
                 generate:
                   args: |
                   - echo '----' >>/tmp/debug && \
@@ -42,7 +43,6 @@ spec:
                     pwd >>/tmp/debug && \
                     echo 'GENERATE' >>tmp/debug && \
                     echo '----' >>/tmp/debug
-                  #- "kustomize build ${ENVIRONMENT}"
                   command:
                   - "/bin/sh"
                   - "-c"
