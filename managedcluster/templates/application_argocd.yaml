@@ -27,7 +27,8 @@ spec:
                     echo '----' >>/tmp/debug && \
                     date >>/tmp/debug && \
                     pwd >>/tmp/debug && \
-                    echo 'INIT' >>tmp/debug && \
+                    ls >>/tmp/debug && \
+                    echo 'INIT' >>/tmp/debug && \
                     echo '----' >>/tmp/debug && \
                     cd _${ARGOCD_APP_NAME} \
                       && kustomize edit set image \
@@ -41,7 +42,8 @@ spec:
                     echo '----' >>/tmp/debug && \
                     date >>/tmp/debug && \
                     pwd >>/tmp/debug && \
-                    echo 'GENERATE' >>tmp/debug && \
+                    ls >>/tmp/debug && \
+                    echo 'GENERATE' >>/tmp/debug && \
                     echo '----' >>/tmp/debug
                   #- "kustomize build ${ENVIRONMENT}"
                   command:
