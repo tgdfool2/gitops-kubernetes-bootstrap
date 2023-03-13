@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: metrics-server-managedcluster
+  namespace: argocd
+spec:
+  destination:
+    name: test-crossplane
+    namespace: metrics-server
+  project: default
+  source:
+    chart: metrics-server
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: "6.2.12"
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
