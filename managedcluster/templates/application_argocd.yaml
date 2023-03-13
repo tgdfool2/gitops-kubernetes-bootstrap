@@ -34,7 +34,7 @@ spec:
                   command:
                   - "/bin/sh"
                   - "-c"
-                name: "kustomize"
+                name: "kustomize-sha"
             kustomize.buildOptions: --load_restrictor none
             kustomize.buildOptions.v4.1.3: --output /tmp
         controller:
