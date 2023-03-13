@@ -24,11 +24,11 @@ spec:
                 init:
                   args:
                   - |
-                    echo '----' >>/tmp/debug
-                    date >>/tmp/debug
-                    pwd >>/tmp/debug
-                    echo 'INIT' >>tmp/debug
-                    echo '----' >>/tmp/debug
+                    echo '----' >>/tmp/debug && \
+                    date >>/tmp/debug && \
+                    pwd >>/tmp/debug && \
+                    echo 'INIT' >>tmp/debug && \
+                    echo '----' >>/tmp/debug && \
                     cd _${ARGOCD_APP_NAME} \
                       && kustomize edit set image \
                         ${REGISTRY}/${ARGOCD_APP_NAME}=${REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION}
@@ -37,10 +37,10 @@ spec:
                   - "-c"
                 generate:
                   args: |
-                  - echo '----' >>/tmp/debug
-                    date >>/tmp/debug
-                    pwd >>/tmp/debug
-                    echo 'GENERATE' >>tmp/debug
+                  - echo '----' >>/tmp/debug && \
+                    date >>/tmp/debug && \
+                    pwd >>/tmp/debug && \
+                    echo 'GENERATE' >>tmp/debug && \
                     echo '----' >>/tmp/debug
                   #- "kustomize build ${ENVIRONMENT}"
                   command:
