@@ -10,7 +10,7 @@ metadata:
 spec:
   destination:
     name: test-crossplane
-    namespace: metrics-server
+    namespace: kube-system
   project: default
   source:
     chart: metrics-server
