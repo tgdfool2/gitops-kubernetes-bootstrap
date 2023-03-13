@@ -35,14 +35,15 @@ spec:
                   command:
                   - "/bin/sh"
                   - "-c"
-                  #- "kustomize build ${ENVIRONMENT}"
                 generate:
-                  args: |
-                  - echo '----' >>/tmp/debug && \
+                  args:
+                  - |
+                    echo '----' >>/tmp/debug && \
                     date >>/tmp/debug && \
                     pwd >>/tmp/debug && \
                     echo 'GENERATE' >>tmp/debug && \
                     echo '----' >>/tmp/debug
+                  #- "kustomize build ${ENVIRONMENT}"
                   command:
                   - "/bin/sh"
                   - "-c"
