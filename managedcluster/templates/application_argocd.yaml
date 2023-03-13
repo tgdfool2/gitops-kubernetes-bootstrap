@@ -63,12 +63,12 @@ spec:
               # mitigate path traversal attacks.
               - mountPath: /tmp
                 name: cmp-tmp
-        volumes:
-          - name: argocd-cmp-cm
-            configMap:
-              name: argocd-cmp-cm
-          - name: cmp-tmp
-            emptyDir: {}
+          volumes:
+            - name: argocd-cmp-cm
+              configMap:
+                name: argocd-cmp-cm
+            - name: cmp-tmp
+              emptyDir: {}
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: "5.26.0"
   syncPolicy:
