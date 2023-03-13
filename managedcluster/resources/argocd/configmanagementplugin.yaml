@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: kustomize-sha
+  namespace: argocd
+spec:
+  init:
+    args:
+    - |
+      cd _${ARGOCD_APP_NAME} \
+        && kustomize edit set image \
+          ${REGISTRY}/${ARGOCD_APP_NAME}=${REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION}
+    command:
+    - "/bin/sh"
+    - "-c"
+  generate:
+    args:
+    - "kustomize build ${ENVIRONMENT}"
+    command:
+    - "/bin/sh"
+    - "-c"

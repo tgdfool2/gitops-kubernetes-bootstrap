@@ -16,33 +16,33 @@ spec:
     chart: argo-cd
     helm:
       values: |
-        configs:
-          cm:
-            configManagementPlugins: |-
-              - generate:
-                  args:
-                  - "kustomize build ${ENVIRONMENT}"
-                  command:
-                  - "/bin/sh"
-                  - "-c"
-                init:
-                  args:
-                  - |
-                    cd _${ARGOCD_APP_NAME} \
-                      && kustomize edit set image \
-                        ${REGISTRY}/${ARGOCD_APP_NAME}=${REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION}
-                  command:
-                  - "/bin/sh"
-                  - "-c"
-                name: "kustomize-sha"
-            kustomize.buildOptions: --load_restrictor none
-            kustomize.buildOptions.v4.1.3: --output /tmp
         controller:
           args:
             appResyncPeriod: 15
         repoServer:
           extraArgs:
           - '--revision-cache-expiration=30s'
+          extraContainers:
+          - name: kustomize-sha
+            command:
+              - "/var/run/argocd/argocd-cmp-server"
+            image: busybox
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 999
+            volumeMounts:
+              - mountPath: /var/run/argocd
+                name: var-files
+              - mountPath: /home/argocd/cmp-server/plugins
+                name: plugins
+              # Remove this volumeMount if you've chosen to bake the config file into the sidecar image.
+              - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+                subPath: my-plugin.yaml
+                name: argocd-cmp-cm
+              # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
+              # mitigate path traversal attacks.
+              - mountPath: /tmp
+                name: cmp-tmp
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: "5.24.1"
   syncPolicy:
