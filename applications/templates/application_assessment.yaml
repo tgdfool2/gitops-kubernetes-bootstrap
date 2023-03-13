@@ -20,7 +20,7 @@ spec:
         value: test-crossplane
       - name: REGISTRY
         value: ghcr.io/tgdfool2
-      name: kustomize
+      name: kustomize-sha
     repoURL: https://github.com/tgdfool2/assessment.git
     targetRevision: HEAD
   syncPolicy:
