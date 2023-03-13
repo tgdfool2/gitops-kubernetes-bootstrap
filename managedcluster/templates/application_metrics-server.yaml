@@ -14,8 +14,8 @@ spec:
   project: default
   source:
     chart: metrics-server
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: "6.2.12"
+    repoURL: https://kubernetes-sigs.github.io/metrics-server/
+    targetRevision: "3.8.3"
   syncPolicy:
     automated:
       selfHeal: true
