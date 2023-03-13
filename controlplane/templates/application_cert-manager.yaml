@@ -21,6 +21,7 @@ spec:
           value: 'true'
     chart: cert-manager
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

@@ -23,6 +23,7 @@ spec:
           secretName: cloudflare-credentials
     chart: external-dns
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

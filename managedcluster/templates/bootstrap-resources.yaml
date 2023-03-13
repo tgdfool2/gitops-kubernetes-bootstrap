@@ -17,6 +17,7 @@ spec:
     repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
     targetRevision: HEAD
   syncPolicy:
-    automated: {}
+    automated:
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
