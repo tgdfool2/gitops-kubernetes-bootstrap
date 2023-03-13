@@ -43,6 +43,7 @@ spec:
                     date >>/tmp/debug && \
                     pwd >>/tmp/debug && \
                     ls >>/tmp/debug && \
+                    echo "kustomize build ${ENVIRONMENT}" >>/tmp/debug && \
                     echo 'GENERATE' >>/tmp/debug && \
                     echo '----' >>/tmp/debug
                   #- "kustomize build ${ENVIRONMENT}"
