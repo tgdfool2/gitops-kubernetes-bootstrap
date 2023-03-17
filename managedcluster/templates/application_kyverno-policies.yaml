@@ -16,6 +16,8 @@ spec:
     chart: kyverno-policies
     helm:
       values: |
+        includeRestrictedPolicies:
+        - require-run-as-non-root-user
         validationFailureActionByPolicy:
           require-run-as-non-root-user: enforce
     repoURL: https://kyverno.github.io/kyverno
