@@ -16,6 +16,12 @@ spec:
     chart: argo-cd
     helm:
       values: |
+        configs:
+          cm:
+            resource.compareoptions: |
+              # Disables status field diffing in specified resource types
+              # Required for Kyverno (https://kyverno.io/docs/installation/#notes-for-argocd-users)
+              ignoreAggregatedRoles: true
         controller:
           args:
             appResyncPeriod: 15
