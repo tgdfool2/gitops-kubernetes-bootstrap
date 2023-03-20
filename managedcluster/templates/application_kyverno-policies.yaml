@@ -25,5 +25,4 @@ spec:
     repoURL: https://kyverno.github.io/kyverno
     targetRevision: "2.6.5"
   syncPolicy:
-    automated:
-      selfHeal: true
+    automated: {}
