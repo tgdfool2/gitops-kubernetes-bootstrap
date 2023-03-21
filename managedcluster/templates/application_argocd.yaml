@@ -25,22 +25,12 @@ spec:
                   args:
                   - |
                     cd _${ARGOCD_APP_NAME} \
-                      && kustomize edit set image \
-                        ${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}=${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION} \
-                      && cat kustomization.yml >>/tmp/debug
+                      && sed -i "s/newTag: latest/newTag: sha-${ARGOCD_APP_REVISION}/" kustomization.yml
                   command:
                   - "/bin/sh"
                   - "-c"
                 generate:
                   args:
-                  #- |
-                  #  echo '----' >>/tmp/debug && \
-                  #  date >>/tmp/debug && \
-                  #  pwd >>/tmp/debug && \
-                  #  ls >>/tmp/debug && \
-                  #  echo "kustomize build ${ARGOCD_ENV_ENVIRONMENT}" >>/tmp/debug && \
-                  #  echo 'GENERATE' >>/tmp/debug && \
-                  #  echo '----' >>/tmp/debug
                   - "kustomize build ${ARGOCD_ENV_ENVIRONMENT}"
                   command:
                   - "/bin/sh"
