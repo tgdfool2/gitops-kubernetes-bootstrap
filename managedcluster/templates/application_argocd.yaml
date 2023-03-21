@@ -26,7 +26,8 @@ spec:
                   - |
                     cd _${ARGOCD_APP_NAME} \
                       && kustomize edit set image \
-                        ${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}=${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION}
+                        ${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}=${ARGOCD_ENV_REGISTRY}/${ARGOCD_APP_NAME}:sha-${ARGOCD_APP_REVISION} \
+                      && cat kustomization.yml
                   command:
                   - "/bin/sh"
                   - "-c"
