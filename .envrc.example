@@ -1,0 +1,18 @@
+# CIVO_API_KEY
+# https://www.civo.com/docs/account/api-keys
+# Used by the Civo Crossplane provider to talk to the Civo API
+export CIVO_API_KEY='<very-secret-api-key>'
+
+# CLOUDFLARE_API_TOKEN
+# https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+# Used by:
+# * cert-manager to use Cloudflare as DNS01 Challenge Provider for LetsEncrypt
+# * external-dns to automatically update DNS entries for the exposed services
+export CLOUDFLARE_API_TOKEN='<very-secret-token>'
+
+# GITHUB_TOKEN
+# https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+# Used by:
+# * ArgoCD running on the Managed Cluster to be able to clone private repositories
+# * Kubelet running on the Managed Cluster to be able to pull images from private registries
+export GITHUB_TOKEN='<very-secret-token>'
