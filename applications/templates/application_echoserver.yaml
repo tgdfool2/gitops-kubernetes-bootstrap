@@ -1,23 +1,23 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "-2"
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-  name: echoserver
-  namespace: argocd
-spec:
-  destination:
-    namespace: echoserver
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: applications/resources/echoserver
-    repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
-    targetRevision: HEAD
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "-2"
+#  finalizers:
+#  - resources-finalizer.argocd.argoproj.io
+#  name: echoserver
+#  namespace: argocd
+#spec:
+#  destination:
+#    namespace: echoserver
+#    server: https://kubernetes.default.svc
+#  project: default
+#  source:
+#    path: applications/resources/echoserver
+#    repoURL: https://github.com/tgdfool2/gitops-kubernetes-bootstrap.git
+#    targetRevision: HEAD
+#  syncPolicy:
+#    automated:
+#      selfHeal: true
+#    syncOptions:
+#    - CreateNamespace=true
