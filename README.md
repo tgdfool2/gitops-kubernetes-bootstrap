@@ -1,58 +1,77 @@
 # gitops-kubernetes-bootstrap
 
+## Prerequisites
+
+The following prerequisites need to be met before being able to deploy the infrastructure
+using this repository:
+1. Civo Account
+1. Domain name, including DNS Management capabilities, compatible with `external-dns` and `cert-manager`
+1. GitHub Account
+
 ## Procedure
 
+### Deploy infrastructure
+
+1. Add a static `hosts` entry to enable access to the ArgoCD Web UI (optional):
+   ```
+   sudo sed -i -E '/argocd\.local/d' /etc/hosts
+   sudo echo '127.0.0.1 argocd.local' >>/etc/hosts
+   ```
+1. Add the following credentials to the `.envrc` file:
+   ```
+   # CIVO_API_KEY
+   # https://www.civo.com/docs/account/api-keys
+   # Used by the Civo Crossplane provider to talk to the Civo API
+   export CIVO_API_KEY='<very-secret-api-key>'
+
+   # CLOUDFLARE_API_TOKEN
+   # https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+   # Used by:
+   # * cert-manager to use Cloudflare as DNS01 Challenge Provider for LetsEncrypt
+   # * external-dns to automatically update DNS entries for the exposed services
+   export CLOUDFLARE_API_TOKEN='<very-secret-token>'
+
+   # GITHUB_TOKEN
+   # https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+   # Used by:
+   # * ArgoCD running on the Managed Cluster to be able to clone private repositories
+   # * Kubelet running on the Managed Cluster to be able to pull images from private registries
+   export GITHUB_TOKEN='<very-secret-token>'
+   ```
+1. Make sure to be directly connected to the Internet and to remove any proxy configuration:
+   ```
+   # Remove proxy configuration
+   unset HTTP_PROXY HTTPS_PROXY NO_PROXY http_proxy https_proxy no_proxy
+
+   # Test Internet connectivity
+   curl -L -s -o /dev/null -w "%{http_code}" civo.com
+   ```
+1. Start the infrastructure deployment by running the `deploy.sh` script:
+   ```
+   ./deploy.sh
+   ```
+
+### Destroy infrastructure
+
+Tear down the infrastructure deployment by running the `destroy.sh` script:
+   ```
+   ./destroy.sh
+   ```
+
+## Useful commands
+
+### Retrieve ArgoCD initial admin password
 ```
-kind create cluster --config controlplane/kind.yaml
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
 
-helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
-helm upgrade --install argocd argo/argo-cd \
-  --namespace argocd --create-namespace \
-  --version "5.24.1" --wait
-
-# Infrastructure bootstrap on controlplane (kind)
-k apply -f \
-  https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/controlplane/bootstrap.yaml
-
-# Retrieve admin password:
-k -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-
-export CIVO_API_KEY='<very-secret-api-key>'
-sed "s/<CIVO_API_KEY>/${CIVO_API_KEY}/" controlplane/resources/civo/providerconfig.yaml | k apply -f -
-
-k apply -f controlplane/resources/civo/cluster.yaml
-
-k -n crossplane-system get secrets creds-test-crossplane -o json | jq -r '.data.kubeconfig | @base64d' \
-  >/var/tmp/test-crossplane.kubeconfig
-
-argocd login argocd.local --insecure --grpc-web --username admin \
-  --password "$(k -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
-argocd cluster add test-crossplane --kubeconfig /var/tmp/test-crossplane.kubeconfig --yes
-
-export CLOUDFLARE_API_TOKEN='<very-secret-token>'
-sed "s/<CLOUDFLARE_API_TOKEN>/${CLOUDFLARE_API_TOKEN}/" \
-  managedcluster/resources/cloudflare/credentials.yaml | \
-  k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f -
-
-# Infrastructure bootstrap on managedcluster (test-crossplane)
-k apply -f \
-  https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/managedcluster/bootstrap.yaml
-
-# Applications bootstrap on managedcluster (test-crossplane)
-k --kubeconfig /var/tmp/test-crossplane.kubeconfig apply -f \
-  https://raw.githubusercontent.com/tgdfool2/gitops-kubernetes-bootstrap/main/applications/bootstrap.yaml
-
-# Tear down
-k delete -f controlplane/resources/civo/cluster.yaml
-kind delete cluster -n test-crossplane
-
-# Install Crossplane CLI (optional)
+### Install Crossplane CLI (optional)
+```
 curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
 mv kubectl-crossplane ~/bin/
 ```
 
-## Resources
+## Useful Links/Resources
 
 ### kind
 * https://magmax.org/en/blog/argocd/
