@@ -1,3 +1,3 @@
 ---
 domain: nni.fournier.io
-cluster_issuer: letsencrypt-staging
+cluster_issuer: letsencrypt-prod
