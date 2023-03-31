@@ -21,7 +21,7 @@ spec:
       - name: REGISTRY
         value: ghcr.io/tgdfool2
       name: kustomize-sha
-    repoURL: https://github.com/tgdfool2/assessment-dawid.git
+    repoURL: https://github.com/tgdfool2/assessment.git
     targetRevision: HEAD
   syncPolicy:
     automated: {}
